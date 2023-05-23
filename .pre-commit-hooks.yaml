@@ -1,0 +1,7 @@
+-   id: check-branch-name
+    name: "branch name format"
+    entry: check-branch-name
+    language: python
+    stages: [commit, push, manual]
+    pass_filenames: false
+    always_run: true
