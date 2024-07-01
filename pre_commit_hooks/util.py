@@ -9,8 +9,8 @@ class CalledProcessError(RuntimeError):
 
 
 def cmd_output(*cmd: str, retcode: int | None = 0, **kwargs: Any) -> str:
-    kwargs.setdefault('stdout', subprocess.PIPE)
-    kwargs.setdefault('stderr', subprocess.PIPE)
+    kwargs.setdefault("stdout", subprocess.PIPE)
+    kwargs.setdefault("stderr", subprocess.PIPE)
     proc = subprocess.Popen(cmd, **kwargs)
     stdout, stderr = proc.communicate()
     stdout = stdout.decode()
