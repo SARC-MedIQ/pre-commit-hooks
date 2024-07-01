@@ -37,3 +37,8 @@ def test_not_on_a_branch(temp_git_dir):
         cmd_output('git', 'checkout', head)
         # we're not on a branch!
         assert main() == 0
+
+
+def test_github_ref(monkeypatch):
+    monkeypatch.setenv("GITHUB_REF", "refs/heads/aaa-101-test-branch")
+    assert branch_matches() is True
