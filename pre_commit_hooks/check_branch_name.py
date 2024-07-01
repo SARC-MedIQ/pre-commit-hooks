@@ -14,12 +14,17 @@ DEFAULT_PATTERN = r'[a-z]{2,5}-\d+-[a-z0-9-]+'
 def branch_matches(patterns: Optional[AbstractSet[str]] = None) -> bool:
     if not patterns:
         patterns = frozenset((DEFAULT_PATTERN,))
-    try:
-        ref_name = cmd_output('git', 'symbolic-ref', 'HEAD')
-    except CalledProcessError:
-        return True
-    chunks = ref_name.strip().split('/')
-    branch_name = '/'.join(chunks[2:])
+    # check if it's GHA
+    github_ref = os.getenv('GITHUB_REF')
+    if github_ref:
+        branch_name = github_ref.replace('refs/heads/', '')
+    else:
+        try:
+            ref_name = cmd_output('git', 'symbolic-ref', 'HEAD')
+        except CalledProcessError:
+            return True
+        chunks = ref_name.strip().split('/')
+        branch_name = '/'.join(chunks[2:])
     result = any(
         re.match(p, branch_name) for p in patterns
     )
