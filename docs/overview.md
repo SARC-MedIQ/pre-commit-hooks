@@ -13,7 +13,7 @@ Consumed from a repo's `.pre-commit-config.yaml`:
 
 ```yaml
 - repo: https://github.com/SARC-MedIQ/pre-commit-hooks
-  rev: 1.0.0
+  rev: 0.2.0
   hooks:
     - id: check-branch-name
 ```
@@ -30,7 +30,7 @@ Used by [portal](https://github.com/SARC-MedIQ/portal) (alongside isort/black/fl
 | `tests/` | pytest suite |
 
 ```bash
-tox                 # full matrix (py38/py39/py310/pypy3 + pre-commit env)
+tox                 # full matrix (py310–py314 + pre-commit env)
 pytest tests/       # just the unit tests
 tox -e pre-commit   # lint the hook repo itself
 ```
